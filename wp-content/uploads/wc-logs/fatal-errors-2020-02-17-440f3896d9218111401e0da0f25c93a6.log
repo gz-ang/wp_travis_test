@@ -1,0 +1,24 @@
+2020-02-17T08:37:23+00:00 CRITICAL Uncaught Error: Call to undefined function base64decode() in C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php:387
+Stack trace:
+#0 C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php(332): WC_REST_Authentication->check_oauth_signature(Object(stdClass), Array)
+#1 C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php(89): WC_REST_Authentication->perform_oauth_authentication()
+#2 C:\wamp64\www\my\wp-includes\class-wp-hook.php(288): WC_REST_Authentication->authenticate(false)
+#3 C:\wamp64\www\my\wp-includes\plugin.php(206): WP_Hook->apply_filters(false, Array)
+#4 C:\wamp64\www\my\wp-includes\user.php(2758): apply_filters('determine_curre...', false)
+#5 C:\wamp64\www\my\wp-includes\pluggable.php(69): _wp_get_current_user()
+#6 C:\wamp64\www\my\wp-includes\class-wp.php(601): wp_get_current_user()
+#7 C:\wamp64\www\my\wp-settings.php(510): WP->init()
+#8 C:\wamp64\www\my\wp-config.php(92): require_once('C:\ in C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php on line 387
+
+2020-02-17T08:38:11+00:00 CRITICAL Uncaught Error: Call to undefined function base64decode() in C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php:387
+Stack trace:
+#0 C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php(332): WC_REST_Authentication->check_oauth_signature(Object(stdClass), Array)
+#1 C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php(89): WC_REST_Authentication->perform_oauth_authentication()
+#2 C:\wamp64\www\my\wp-includes\class-wp-hook.php(288): WC_REST_Authentication->authenticate(false)
+#3 C:\wamp64\www\my\wp-includes\plugin.php(206): WP_Hook->apply_filters(false, Array)
+#4 C:\wamp64\www\my\wp-includes\user.php(2758): apply_filters('determine_curre...', false)
+#5 C:\wamp64\www\my\wp-includes\pluggable.php(69): _wp_get_current_user()
+#6 C:\wamp64\www\my\wp-includes\class-wp.php(601): wp_get_current_user()
+#7 C:\wamp64\www\my\wp-settings.php(510): WP->init()
+#8 C:\wamp64\www\my\wp-config.php(92): require_once('C:\ in C:\wamp64\www\my\wp-content\plugins\woocommerce\includes\class-wc-rest-authentication.php on line 387
+
