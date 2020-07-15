@@ -34,11 +34,7 @@ env:
 # See: https://docs.travis-ci.com/user/conditions-v1
 stages:
   - name: sniff
-  - name: rulesets
   - name: quicktest
-    if: type = push AND branch NOT IN (master, develop)
-  - name: test
-    if: branch IN (master, develop)
 
 jobs:
   fast_finish: true
@@ -79,34 +75,6 @@ jobs:
         # At a later stage the documentation check can be activated.
         - composer check-complete
 
-    #### RULESET STAGE ####
-    # Make sure the rulesets don't throw unexpected errors or warnings.
-    # This check needs to be run against a high PHP version to prevent triggering the syntax error check.
-    # It also needs to be run against all PHPCS versions WPCS is tested against.
-    - stage: rulesets
-      php: 7.4
-      env: PHPCS_BRANCH="dev-master"
-      script:
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress-Core
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress-Docs
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress-Extra
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress
-
-        # Test for fixer conflicts by running the auto-fixers of the complete WPCS over the test case files.
-        # This is not an exhaustive test, but should give an early indication for typical fixer conflicts.
-        # For the first run, the exit code will be 1 (= all fixable errors fixed).
-        # `travis_retry` should then kick in to run the fixer again which should now return 0 (= no fixable errors found).
-        # All error codes for the PHPCBF: https://github.com/squizlabs/PHP_CodeSniffer/issues/1270#issuecomment-272768413
-        - travis_retry $(pwd)/vendor/bin/phpcbf -pq ./WordPress/Tests/ --standard=WordPress --extensions=inc --exclude=Generic.PHP.Syntax --report=summary
-
-    - stage: rulesets
-      php: 7.4
-      env: PHPCS_BRANCH="3.5.0"
-      script:
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress-Core
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress-Docs
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress-Extra
-        - $(pwd)/vendor/bin/phpcs -ps ./Tests/RulesetCheck/class-ruleset-test.inc --standard=WordPress
 
     #### QUICK TEST STAGE ####
     # This is a much quicker test which only runs the unit tests and linting against the low/high
@@ -121,12 +89,7 @@ jobs:
     - php: 5.4
       env: PHPCS_BRANCH="3.5.0"
 
-    #### TEST STAGE ####
-    # Add extra build to test against PHPCS 4.
-    - stage: test
-      php: 7.4
-      env: PHPCS_BRANCH="4.0.x-dev as 3.9.99"
-
+   
   allow_failures:
     # Allow failures for unstable builds.
     - php: "nightly"
