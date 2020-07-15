@@ -18,6 +18,8 @@ before_install:
   # After CodeSniffer install you should refresh your path.
   - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
 
+install: travis_wait 20 mvn install
+
 script:
   # Run against WordPress Coding Standards.
   # If you use a custom ruleset, change `--standard=WordPress` to point to your ruleset file,
